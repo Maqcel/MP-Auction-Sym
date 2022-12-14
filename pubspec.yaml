@@ -11,10 +11,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  
   async: 2.9.0
   equatable: 2.0.5
   flutter_bloc: 8.1.1
   freezed: 2.3.2
+  intl: 0.17.0
   macos_ui: 1.7.5
 
 dev_dependencies:
@@ -27,3 +31,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+flutter_intl:
+  enabled: true
+  class_name: Strings
+  main_locale: en

@@ -1,4 +1,35 @@
 {
     "@@locale": "en",
-    "titleBarText": "MP Subject Project"
+    "titleBarText": "MP Subject Project",
+    "timeWaitingInQueText": "Waiting time: {minutes}:{seconds}",
+    "@timeWaitingInQueText": {
+        "placeholder": {
+            "minutes": {
+                "type": "String",
+                "example": "21"
+            },
+            "seconds": {
+                "type": "String",
+                "example": "37"
+            }
+        }
+    },
+    "clientFilesSizeText": "Files size: {size}",
+    "@clientFilesSizeText": {
+        "placeholder": {
+            "minutes": {
+                "type": "int",
+                "example": "2137"
+            }
+        }
+    },
+    "clientFilesAmountText": "Amount of files: {amount}",
+    "@clientFilesAmountText": {
+        "placeholder": {
+            "amount": {
+                "type": "int",
+                "example": "2"
+            }
+        }
+    }
 }

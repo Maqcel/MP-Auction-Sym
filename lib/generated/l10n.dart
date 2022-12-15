@@ -59,6 +59,36 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Waiting time: {minutes}:{seconds}`
+  String timeWaitingInQueText(Object minutes, Object seconds) {
+    return Intl.message(
+      'Waiting time: $minutes:$seconds',
+      name: 'timeWaitingInQueText',
+      desc: '',
+      args: [minutes, seconds],
+    );
+  }
+
+  /// `Files size: {size}`
+  String clientFilesSizeText(Object size) {
+    return Intl.message(
+      'Files size: $size',
+      name: 'clientFilesSizeText',
+      desc: '',
+      args: [size],
+    );
+  }
+
+  /// `Amount of files: {amount}`
+  String clientFilesAmountText(Object amount) {
+    return Intl.message(
+      'Amount of files: $amount',
+      name: 'clientFilesAmountText',
+      desc: '',
+      args: [amount],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

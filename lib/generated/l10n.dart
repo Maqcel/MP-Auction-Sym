@@ -89,6 +89,26 @@ class Strings {
       args: [amount],
     );
   }
+
+  /// `Occupied by:\n{id}`
+  String auctionServerUploadingClientText(Object id) {
+    return Intl.message(
+      'Occupied by:\n$id',
+      name: 'auctionServerUploadingClientText',
+      desc: '',
+      args: [id],
+    );
+  }
+
+  /// `Waiting...`
+  String get auctionServerNoClientText {
+    return Intl.message(
+      'Waiting...',
+      name: 'auctionServerNoClientText',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

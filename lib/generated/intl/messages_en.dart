@@ -20,17 +20,22 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(amount) => "Amount of files: ${amount}";
+  static String m0(id) => "Occupied by:\n${id}";
 
-  static String m1(size) => "Files size: ${size}";
+  static String m1(amount) => "Amount of files: ${amount}";
 
-  static String m2(minutes, seconds) => "Waiting time: ${minutes}:${seconds}";
+  static String m2(size) => "Files size: ${size}";
+
+  static String m3(minutes, seconds) => "Waiting time: ${minutes}:${seconds}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "clientFilesAmountText": m0,
-        "clientFilesSizeText": m1,
-        "timeWaitingInQueText": m2,
+        "auctionServerNoClientText":
+            MessageLookupByLibrary.simpleMessage("Waiting..."),
+        "auctionServerUploadingClientText": m0,
+        "clientFilesAmountText": m1,
+        "clientFilesSizeText": m2,
+        "timeWaitingInQueText": m3,
         "titleBarText":
             MessageLookupByLibrary.simpleMessage("MP Subject Project")
       };

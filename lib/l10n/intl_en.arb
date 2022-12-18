@@ -31,5 +31,15 @@
                 "example": "2"
             }
         }
-    }
+    },
+    "auctionServerUploadingClientText": "Occupied by:\n{id}",
+    "@auctionServerUploadingClientText": {
+        "placeholder": {
+            "id": {
+                "type": "int",
+                "example": "2"
+            }
+        }
+    },
+    "auctionServerNoClientText": "Waiting..."
 }

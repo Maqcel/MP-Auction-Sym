@@ -109,6 +109,26 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Client: {id}`
+  String clientTileIdText(Object id) {
+    return Intl.message(
+      'Client: $id',
+      name: 'clientTileIdText',
+      desc: '',
+      args: [id],
+    );
+  }
+
+  /// `Add Client`
+  String get titleBarActionButtonText {
+    return Intl.message(
+      'Add Client',
+      name: 'titleBarActionButtonText',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

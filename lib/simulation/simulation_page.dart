@@ -2,8 +2,11 @@ import 'package:auction_sym/domain/model/client.dart';
 import 'package:auction_sym/extensions/extension_mixin.dart';
 import 'package:auction_sym/simulation/cubit/simulation_cubit.dart';
 import 'package:auction_sym/simulation/cubit/simulation_state.dart';
+import 'package:auction_sym/simulation/widgets/add_client_button.dart';
 import 'package:auction_sym/simulation/widgets/auction_server_display.dart';
+import 'package:auction_sym/simulation/widgets/clients_gird_display.dart';
 import 'package:auction_sym/simulation/widgets/sidebar_content.dart';
+import 'package:auction_sym/style/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:macos_ui/macos_ui.dart';
@@ -35,10 +38,16 @@ class _SimulationPageState extends State<SimulationPage> {
           return Scaffold(
             appBar: AppBar(
               backgroundColor: MacosTheme.of(context).canvasColor,
+              centerTitle: true,
               title: Text(
                 context.localization.titleBarText,
                 style: MacosTheme.of(context).typography.title1,
               ),
+              actions: [
+                // TODO: Add client creation method
+                AddClientButton(onPressed: () {}),
+                const SizedBox(width: Dimens.m),
+              ],
             ),
             backgroundColor: MacosTheme.of(context).canvasColor,
             body: LayoutBuilder(
@@ -86,6 +95,7 @@ class _SimulationPageState extends State<SimulationPage> {
               isOnlyContent: !shouldShowSideContent,
               constraints: constraints,
             ),
+            ClientGridDisplay(constraints: constraints),
           ],
         ),
       );

@@ -18,7 +18,7 @@ class SidebarContent extends StatelessWidget with ExtensionMixin {
   })  : _constraints = constraints,
         _client = client;
 
-  // TODO: Remove mocks
+  // TODO: Remove Mocks
   @override
   Widget build(BuildContext context) => Container(
         decoration: _decoration(context),

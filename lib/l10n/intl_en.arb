@@ -41,5 +41,15 @@
             }
         }
     },
-    "auctionServerNoClientText": "Waiting..."
+    "auctionServerNoClientText": "Waiting...",
+    "clientTileIdText": "Client: {id}",
+    "@clientTileIdText": {
+        "placeholder": {
+            "id": {
+                "type": "int",
+                "example": "2"
+            }
+        }
+    },
+    "titleBarActionButtonText": "Add Client"
 }

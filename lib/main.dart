@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MacosApp(
+        debugShowCheckedModeBanner: false,
         theme: MacosThemeData(),
         home: BlocProvider(
           create: (context) => SimulationCubit(),

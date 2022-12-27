@@ -26,7 +26,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(size) => "Files size: ${size}";
 
-  static String m3(minutes, seconds) => "Waiting time: ${minutes}:${seconds}";
+  static String m3(id) => "Client: ${id}";
+
+  static String m4(minutes, seconds) => "Waiting time: ${minutes}:${seconds}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -35,7 +37,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "auctionServerUploadingClientText": m0,
         "clientFilesAmountText": m1,
         "clientFilesSizeText": m2,
-        "timeWaitingInQueText": m3,
+        "clientTileIdText": m3,
+        "timeWaitingInQueText": m4,
+        "titleBarActionButtonText":
+            MessageLookupByLibrary.simpleMessage("Add Client"),
         "titleBarText":
             MessageLookupByLibrary.simpleMessage("MP Subject Project")
       };

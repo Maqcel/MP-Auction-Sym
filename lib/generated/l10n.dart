@@ -60,20 +60,20 @@ class Strings {
     );
   }
 
-  /// `Waiting time: {minutes}:{seconds}`
-  String timeWaitingInQueText(Object minutes, Object seconds) {
+  /// `Waiting time: {hour}:{minutes}:{seconds}`
+  String timeWaitingInQueText(String hour, String minutes, String seconds) {
     return Intl.message(
-      'Waiting time: $minutes:$seconds',
+      'Waiting time: $hour:$minutes:$seconds',
       name: 'timeWaitingInQueText',
       desc: '',
-      args: [minutes, seconds],
+      args: [hour, minutes, seconds],
     );
   }
 
-  /// `Files size: {size}`
-  String clientFilesSizeText(Object size) {
+  /// `File size: {size}`
+  String clientFilesSizeText(int size) {
     return Intl.message(
-      'Files size: $size',
+      'File size: $size',
       name: 'clientFilesSizeText',
       desc: '',
       args: [size],
@@ -81,7 +81,7 @@ class Strings {
   }
 
   /// `Amount of files: {amount}`
-  String clientFilesAmountText(Object amount) {
+  String clientFilesAmountText(int amount) {
     return Intl.message(
       'Amount of files: $amount',
       name: 'clientFilesAmountText',
@@ -91,7 +91,7 @@ class Strings {
   }
 
   /// `Occupied by:\n{id}`
-  String auctionServerUploadingClientText(Object id) {
+  String auctionServerUploadingClientText(int id) {
     return Intl.message(
       'Occupied by:\n$id',
       name: 'auctionServerUploadingClientText',
@@ -111,7 +111,7 @@ class Strings {
   }
 
   /// `Client: {id}`
-  String clientTileIdText(Object id) {
+  String clientTileIdText(String id) {
     return Intl.message(
       'Client: $id',
       name: 'clientTileIdText',
@@ -125,6 +125,36 @@ class Strings {
     return Intl.message(
       'Add Client',
       name: 'titleBarActionButtonText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Client for detailed info`
+  String get sideBarClientNotSelected {
+    return Intl.message(
+      'Select Client for detailed info',
+      name: 'sideBarClientNotSelected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All waiting Clients will be shown here!`
+  String get clientsEmptyText {
+    return Intl.message(
+      'All waiting Clients will be shown here!',
+      name: 'clientsEmptyText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Client Files:`
+  String get sideBarFilesHeaderText {
+    return Intl.message(
+      'Client Files:',
+      name: 'sideBarFilesHeaderText',
       desc: '',
       args: [],
     );

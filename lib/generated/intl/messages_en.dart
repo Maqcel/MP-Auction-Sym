@@ -24,11 +24,12 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(amount) => "Amount of files: ${amount}";
 
-  static String m2(size) => "Files size: ${size}";
+  static String m2(size) => "File size: ${size}";
 
   static String m3(id) => "Client: ${id}";
 
-  static String m4(minutes, seconds) => "Waiting time: ${minutes}:${seconds}";
+  static String m4(hour, minutes, seconds) =>
+      "Waiting time: ${hour}:${minutes}:${seconds}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -38,6 +39,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "clientFilesAmountText": m1,
         "clientFilesSizeText": m2,
         "clientTileIdText": m3,
+        "clientsEmptyText": MessageLookupByLibrary.simpleMessage(
+            "All waiting Clients will be shown here!"),
+        "sideBarClientNotSelected": MessageLookupByLibrary.simpleMessage(
+            "Select Client for detailed info"),
+        "sideBarFilesHeaderText":
+            MessageLookupByLibrary.simpleMessage("Client Files:"),
         "timeWaitingInQueText": m4,
         "titleBarActionButtonText":
             MessageLookupByLibrary.simpleMessage("Add Client"),

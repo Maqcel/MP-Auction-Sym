@@ -31,7 +31,10 @@ class _SimulationPageState extends State<SimulationPage> {
 
   Widget _builder(BuildContext context, SimulationState state) =>
       state.maybeWhen(
-        init: () {
+        simulationState: (
+          clients,
+          selectedClient,
+        ) {
           bool shouldShowSideContent =
               MediaQuery.of(context).size.width >= 900 &&
                   MediaQuery.of(context).size.height >= 250;
@@ -44,8 +47,8 @@ class _SimulationPageState extends State<SimulationPage> {
                 style: MacosTheme.of(context).typography.title1,
               ),
               actions: [
-                // TODO: Add client creation method
-                AddClientButton(onPressed: () {}),
+                AddClientButton(
+                    onPressed: context.read<SimulationCubit>().addNewClient),
                 const SizedBox(width: Dimens.m),
               ],
             ),
@@ -56,11 +59,17 @@ class _SimulationPageState extends State<SimulationPage> {
                   Row(
                     children: [
                       if (shouldShowSideContent)
-                        _sideBuilder(context, constraints),
+                        _sideBuilder(
+                          context,
+                          constraints,
+                          state.selectedClient,
+                        ),
                       _mainBuilder(
                         context,
                         shouldShowSideContent,
                         constraints,
+                        clients,
+                        selectedClient,
                       ),
                     ],
                   ),
@@ -75,16 +84,19 @@ class _SimulationPageState extends State<SimulationPage> {
   Widget _sideBuilder(
     BuildContext context,
     BoxConstraints constraints,
+    Client? selectedClient,
   ) =>
       SidebarContent(
         constraints: constraints,
-        client: const Client(id: ''),
+        client: selectedClient,
       );
 
   Widget _mainBuilder(
     BuildContext context,
     bool shouldShowSideContent,
     BoxConstraints constraints,
+    List<Client> clients,
+    Client? selectedClient,
   ) =>
       SizedBox(
         width: constraints.maxWidth * (shouldShowSideContent ? 0.8 : 1.0),
@@ -95,7 +107,13 @@ class _SimulationPageState extends State<SimulationPage> {
               isOnlyContent: !shouldShowSideContent,
               constraints: constraints,
             ),
-            ClientGridDisplay(constraints: constraints),
+            ClientGridDisplay(
+              constraints: constraints,
+              clients: clients,
+              selectedClient: selectedClient,
+              onTilePressed:
+                  context.read<SimulationCubit>().changeSelectedClient,
+            ),
           ],
         ),
       );

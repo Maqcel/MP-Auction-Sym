@@ -1,50 +1,55 @@
 import 'dart:math';
 
+import 'package:auction_sym/domain/model/client.dart';
 import 'package:auction_sym/extensions/extension_mixin.dart';
 import 'package:auction_sym/style/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:macos_ui/macos_ui.dart';
 
 class ClientTile extends StatelessWidget with ExtensionMixin {
+  final Client _client;
   final bool _isSelected;
   final bool _isSending;
-  // final Client _client;
   final BoxConstraints _constraints;
+  final Function(Client) _onTilePressed;
 
   const ClientTile({
     super.key,
+    required Client client,
     required bool isSelected,
     required bool isSending,
-    // required Client client,
     required BoxConstraints constraints,
-  })  :
-        // : _client = client,
+    required Function(Client) onTilePressed,
+  })  : _client = client,
         _isSelected = isSelected,
         _isSending = isSending,
-        _constraints = constraints;
+        _constraints = constraints,
+        _onTilePressed = onTilePressed;
 
-  // TODO: Remove Mocks
   @override
   Widget build(BuildContext context) => Padding(
         padding: EdgeInsets.symmetric(
           vertical: _constraints.maxHeight * 0.05,
           horizontal: _constraints.maxWidth * 0.02,
         ),
-        child: Container(
-          decoration: _isSelected
-              ? _decorationSelected(context)
-              : _decorationNotSelected(context, _isSending),
-          constraints: BoxConstraints(
-            maxHeight: _constraints.maxHeight * 0.2,
-            maxWidth: _constraints.maxWidth * 0.25,
-            minHeight: _constraints.maxHeight * 0.1,
-            minWidth: _constraints.maxWidth * 0.15,
-          ),
-          padding: const EdgeInsets.all(Dimens.m),
-          child: LayoutBuilder(
-            builder: (context, constraints) => _clientContent(
-              context,
-              constraints,
+        child: GestureDetector(
+          onTap: () => _onTilePressed(_client),
+          child: Container(
+            decoration: _isSelected
+                ? _decorationSelected(context)
+                : _decorationNotSelected(context, _isSending),
+            constraints: BoxConstraints(
+              maxHeight: _constraints.maxHeight * 0.2,
+              maxWidth: _constraints.maxWidth * 0.25,
+              minHeight: _constraints.maxHeight * 0.1,
+              minWidth: _constraints.maxWidth * 0.15,
+            ),
+            padding: const EdgeInsets.all(Dimens.m),
+            child: LayoutBuilder(
+              builder: (context, constraints) => _clientContent(
+                context,
+                constraints,
+              ),
             ),
           ),
         ),
@@ -138,7 +143,7 @@ class ClientTile extends StatelessWidget with ExtensionMixin {
             ),
             decoration: _decorationNotSelected(context, false),
             child: Text(
-              context.localization.clientTileIdText(Random().nextInt(100)),
+              context.localization.clientTileIdText(_client.id.toString()),
               style: MacosTheme.of(context).typography.body,
             ),
           )
@@ -148,27 +153,25 @@ class ClientTile extends StatelessWidget with ExtensionMixin {
   Widget _filesRow(
     BuildContext context,
     BoxConstraints constraints,
-  ) {
-    int length = Random().nextInt(7) + 1;
-
-    return Container(
-      decoration: _decorationNotSelected(context, false),
-      padding: const EdgeInsets.all(Dimens.s),
-      child: Row(
-        children: List.generate(
-          length,
-          (index) => Container(
-            height: Dimens.l,
-            width: (constraints.maxWidth - Dimens.s * 2) / length,
-            decoration: BoxDecoration(
-              border: Border.all(color: MacosTheme.of(context).canvasColor),
-              color: Random().nextBool()
-                  ? MacosTheme.of(context).dividerColor
-                  : Colors.green.shade600,
-            ),
-          ),
+  ) =>
+      Container(
+        decoration: _decorationNotSelected(context, false),
+        padding: const EdgeInsets.all(Dimens.s),
+        child: Row(
+          children: _client.files
+              .map((file) => Container(
+                    height: Dimens.l,
+                    width: (constraints.maxWidth - Dimens.s * 2) /
+                        _client.files.length,
+                    decoration: BoxDecoration(
+                      border:
+                          Border.all(color: MacosTheme.of(context).canvasColor),
+                      color: file.isSend
+                          ? MacosTheme.of(context).dividerColor
+                          : Colors.green.shade600,
+                    ),
+                  ))
+              .toList(),
         ),
-      ),
-    );
-  }
+      );
 }

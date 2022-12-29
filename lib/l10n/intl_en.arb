@@ -1,9 +1,13 @@
 {
     "@@locale": "en",
     "titleBarText": "MP Subject Project",
-    "timeWaitingInQueText": "Waiting time: {minutes}:{seconds}",
+    "timeWaitingInQueText": "Waiting time: {hour}:{minutes}:{seconds}",
     "@timeWaitingInQueText": {
-        "placeholder": {
+        "placeholders": {
+            "hour": {
+                "type": "String",
+                "example": "21"
+            },
             "minutes": {
                 "type": "String",
                 "example": "21"
@@ -14,10 +18,10 @@
             }
         }
     },
-    "clientFilesSizeText": "Files size: {size}",
+    "clientFilesSizeText": "File size: {size}",
     "@clientFilesSizeText": {
-        "placeholder": {
-            "minutes": {
+        "placeholders": {
+            "size": {
                 "type": "int",
                 "example": "2137"
             }
@@ -25,7 +29,7 @@
     },
     "clientFilesAmountText": "Amount of files: {amount}",
     "@clientFilesAmountText": {
-        "placeholder": {
+        "placeholders": {
             "amount": {
                 "type": "int",
                 "example": "2"
@@ -34,7 +38,7 @@
     },
     "auctionServerUploadingClientText": "Occupied by:\n{id}",
     "@auctionServerUploadingClientText": {
-        "placeholder": {
+        "placeholders": {
             "id": {
                 "type": "int",
                 "example": "2"
@@ -44,12 +48,15 @@
     "auctionServerNoClientText": "Waiting...",
     "clientTileIdText": "Client: {id}",
     "@clientTileIdText": {
-        "placeholder": {
+        "placeholders": {
             "id": {
-                "type": "int",
+                "type": "String",
                 "example": "2"
             }
         }
     },
-    "titleBarActionButtonText": "Add Client"
+    "titleBarActionButtonText": "Add Client",
+    "sideBarClientNotSelected": "Select Client for detailed info",
+    "clientsEmptyText": "All waiting Clients will be shown here!",
+    "sideBarFilesHeaderText": "Client Files:"
 }

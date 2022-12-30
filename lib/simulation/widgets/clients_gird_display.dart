@@ -1,14 +1,15 @@
-import 'dart:math';
-
 import 'package:auction_sym/domain/model/client.dart';
+import 'package:auction_sym/domain/model/server_representation.dart';
 import 'package:auction_sym/extensions/extension_mixin.dart';
 import 'package:auction_sym/simulation/widgets/client_tile.dart';
 import 'package:auction_sym/style/dimens.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:macos_ui/macos_ui.dart';
 
 class ClientGridDisplay extends StatelessWidget with ExtensionMixin {
   final BoxConstraints _constraints;
+  final List<ServerRepresentation> _servers;
   final List<Client> _clients;
   final Client? _selectedClient;
   final Function(Client) _onTilePressed;
@@ -16,10 +17,12 @@ class ClientGridDisplay extends StatelessWidget with ExtensionMixin {
   const ClientGridDisplay({
     super.key,
     required BoxConstraints constraints,
+    required List<ServerRepresentation> servers,
     required List<Client> clients,
     required Client? selectedClient,
     required Function(Client) onTilePressed,
   })  : _constraints = constraints,
+        _servers = servers,
         _clients = clients,
         _selectedClient = selectedClient,
         _onTilePressed = onTilePressed;
@@ -35,7 +38,9 @@ class ClientGridDisplay extends StatelessWidget with ExtensionMixin {
                     (client) => ClientTile(
                       client: client,
                       isSelected: client.id == _selectedClient?.id,
-                      isSending: Random().nextBool(),
+                      isSending: _servers.firstWhereOrNull(
+                              (server) => server.occupiedBy?.id == client.id) !=
+                          null,
                       constraints: _constraints,
                       onTilePressed: _onTilePressed,
                     ),

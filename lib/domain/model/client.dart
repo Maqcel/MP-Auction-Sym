@@ -2,10 +2,9 @@ import 'dart:math';
 
 import 'package:auction_sym/domain/model/simulation_file.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
 class Client extends Equatable {
-  final UniqueKey id;
+  final String id;
   final List<SimulationFile> files;
   final Stopwatch waitingTimer;
 
@@ -17,8 +16,8 @@ class Client extends Equatable {
     required this.waitingTimer,
   });
 
-  factory Client.createClient() => Client(
-        id: UniqueKey(),
+  factory Client.createClient({required String id}) => Client(
+        id: id,
         files: List.generate(
           Random().nextInt(6) + 1,
           (_) => SimulationFile(size: Random().nextInt(1000) + 24),

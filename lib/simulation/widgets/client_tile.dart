@@ -143,7 +143,7 @@ class ClientTile extends StatelessWidget with ExtensionMixin {
             ),
             decoration: _decorationNotSelected(context, false),
             child: Text(
-              context.localization.clientTileIdText(_client.id.toString()),
+              context.localization.clientTileIdText(_client.id),
               style: MacosTheme.of(context).typography.body,
             ),
           )

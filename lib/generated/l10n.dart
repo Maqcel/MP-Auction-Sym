@@ -91,7 +91,7 @@ class Strings {
   }
 
   /// `Occupied by:\n{id}`
-  String auctionServerUploadingClientText(int id) {
+  String auctionServerUploadingClientText(String id) {
     return Intl.message(
       'Occupied by:\n$id',
       name: 'auctionServerUploadingClientText',

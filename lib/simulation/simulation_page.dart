@@ -1,4 +1,5 @@
 import 'package:auction_sym/domain/model/client.dart';
+import 'package:auction_sym/domain/model/server_representation.dart';
 import 'package:auction_sym/extensions/extension_mixin.dart';
 import 'package:auction_sym/simulation/cubit/simulation_cubit.dart';
 import 'package:auction_sym/simulation/cubit/simulation_state.dart';
@@ -27,11 +28,13 @@ class _SimulationPageState extends State<SimulationPage> {
         listener: _listener,
       );
 
-  bool _buildWhen(SimulationState previous, SimulationState current) => true;
+  bool _buildWhen(SimulationState previous, SimulationState current) =>
+      current is SimulationStateSimulationState;
 
   Widget _builder(BuildContext context, SimulationState state) =>
       state.maybeWhen(
         simulationState: (
+          servers,
           clients,
           selectedClient,
         ) {
@@ -62,12 +65,13 @@ class _SimulationPageState extends State<SimulationPage> {
                         _sideBuilder(
                           context,
                           constraints,
-                          state.selectedClient,
+                          selectedClient,
                         ),
                       _mainBuilder(
                         context,
                         shouldShowSideContent,
                         constraints,
+                        servers,
                         clients,
                         selectedClient,
                       ),
@@ -95,6 +99,7 @@ class _SimulationPageState extends State<SimulationPage> {
     BuildContext context,
     bool shouldShowSideContent,
     BoxConstraints constraints,
+    List<ServerRepresentation> servers,
     List<Client> clients,
     Client? selectedClient,
   ) =>
@@ -106,9 +111,11 @@ class _SimulationPageState extends State<SimulationPage> {
             AuctionServerDisplay(
               isOnlyContent: !shouldShowSideContent,
               constraints: constraints,
+              servers: servers,
             ),
             ClientGridDisplay(
               constraints: constraints,
+              servers: servers,
               clients: clients,
               selectedClient: selectedClient,
               onTilePressed:

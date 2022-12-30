@@ -40,8 +40,8 @@
     "@auctionServerUploadingClientText": {
         "placeholders": {
             "id": {
-                "type": "int",
-                "example": "2"
+                "type": "String",
+                "example": "#2"
             }
         }
     },

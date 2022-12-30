@@ -1,5 +1,4 @@
-import 'dart:math';
-
+import 'package:auction_sym/domain/model/server_representation.dart';
 import 'package:auction_sym/extensions/extension_mixin.dart';
 import 'package:auction_sym/style/dimens.dart';
 import 'package:flutter/material.dart';
@@ -8,15 +7,17 @@ import 'package:macos_ui/macos_ui.dart';
 class ServerTile extends StatelessWidget with ExtensionMixin {
   final bool _isOnlyContent;
   final BoxConstraints _constraints;
+  final ServerRepresentation _server;
 
   const ServerTile({
     super.key,
     required bool isOnlyContent,
     required BoxConstraints constraints,
+    required ServerRepresentation server,
   })  : _isOnlyContent = isOnlyContent,
-        _constraints = constraints;
+        _constraints = constraints,
+        _server = server;
 
-  // TODO: Remove mocks
   @override
   Widget build(BuildContext context) => Padding(
         padding: EdgeInsets.symmetric(
@@ -35,7 +36,7 @@ class ServerTile extends StatelessWidget with ExtensionMixin {
             minHeight: _constraints.maxHeight * 0.1,
             minWidth: _constraints.maxWidth * (_isOnlyContent ? 0.1 : 0.05),
           ),
-          child: Random().nextBool()
+          child: _server.occupiedBy != null
               ? _uploadingContent(context)
               : _waitingForContent(context),
         ),
@@ -64,12 +65,13 @@ class ServerTile extends StatelessWidget with ExtensionMixin {
             const Spacer(),
             Text(
               context.localization
-                  .auctionServerUploadingClientText(Random().nextInt(100)),
+                  .auctionServerUploadingClientText(_server.occupiedBy!.id),
               style: MacosTheme.of(context).typography.body,
               textAlign: TextAlign.center,
             ),
             const Spacer(),
-            ProgressBar(value: Random().nextDouble() * 100),
+            // TODO: Create smoother animation
+            ProgressBar(value: _server.progress.toDouble()),
           ],
         ),
       );

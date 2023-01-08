@@ -62,9 +62,11 @@ Future<void> _serverWork(SendPort sendPort) async {
       sendPort.send(ServerRepresentation(
         occupiedBy: client,
         progress: ++i * 10,
+        isAuctionRunning: false,
       ));
-      await Future.delayed(const Duration(milliseconds: 250));
+      await Future.delayed(
+        Duration(milliseconds: (client.files.first.size ~/ 200 + 1) * 400),
+      );
     }
-    sendPort.send(const ServerRepresentation());
   });
 }

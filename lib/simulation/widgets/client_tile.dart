@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:auction_sym/domain/model/client.dart';
 import 'package:auction_sym/extensions/extension_mixin.dart';
 import 'package:auction_sym/style/dimens.dart';
@@ -125,15 +123,10 @@ class ClientTile extends StatelessWidget with ExtensionMixin {
             height: Dimens.l,
             width: Dimens.l,
             decoration: _decorationNotSelected(context, false),
-            // TODO: Add colorPicking logic based on time passed
             child: Icon(
               Icons.timer_rounded,
               size: Dimens.m,
-              color: [
-                Colors.green,
-                Colors.orange,
-                Colors.red
-              ][Random().nextInt(3)],
+              color: _client.waitingTimer.timerColor,
             ),
           ),
           Container(

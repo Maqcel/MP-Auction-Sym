@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:auction_sym/domain/model/client.dart';
 import 'package:auction_sym/extensions/extension_mixin.dart';
 import 'package:auction_sym/style/dimens.dart';
@@ -7,45 +5,27 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:macos_ui/macos_ui.dart';
 
-class SidebarContent extends StatefulWidget with ExtensionMixin {
-  final BoxConstraints constraints;
-  final Client? client;
+class SidebarContent extends StatelessWidget with ExtensionMixin {
+  final BoxConstraints _constraints;
+  final Client? _client;
 
   const SidebarContent({
     super.key,
-    required this.constraints,
-    required this.client,
-  });
-
-  @override
-  State<SidebarContent> createState() => _SidebarContentState();
-}
-
-class _SidebarContentState extends State<SidebarContent> {
-  late final Timer? _refreshTimer;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _refreshTimer = Timer.periodic(
-      const Duration(seconds: 1),
-      (_) => _refreshScreen(),
-    );
-  }
-
-  void _refreshScreen() => setState(() {});
+    required BoxConstraints constraints,
+    required Client? client,
+  })  : _constraints = constraints,
+        _client = client;
 
   @override
   Widget build(BuildContext context) => Container(
         decoration: _decoration(context),
         height: MediaQuery.of(context).size.height - kToolbarHeight,
-        width: widget.constraints.maxWidth * 0.2,
+        width: _constraints.maxWidth * 0.2,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: Dimens.m),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: widget.client == null
+            children: _client == null
                 ? _sideBarEmpty(context)
                 : [
                     const SizedBox(height: Dimens.s),
@@ -57,11 +37,10 @@ class _SidebarContentState extends State<SidebarContent> {
                       ),
                       context.localization.timeWaitingInQueText(
                         NumberFormat('00')
-                            .format(widget.client!.getWaitingTime ~/ 3600),
+                            .format(_client!.getWaitingTime ~/ 3600),
                         NumberFormat('00')
-                            .format(widget.client!.getWaitingTime ~/ 60),
-                        NumberFormat('00')
-                            .format(widget.client!.getWaitingTime % 60),
+                            .format(_client!.getWaitingTime ~/ 60),
+                        NumberFormat('00').format(_client!.getWaitingTime % 60),
                       ),
                     ),
                     const SizedBox(height: Dimens.s),
@@ -72,7 +51,7 @@ class _SidebarContentState extends State<SidebarContent> {
                         color: Colors.white70,
                       ),
                       context.localization
-                          .clientFilesAmountText(widget.client!.files.length),
+                          .clientFilesAmountText(_client!.files.length),
                     ),
                     const SizedBox(height: Dimens.s),
                     Padding(
@@ -83,13 +62,17 @@ class _SidebarContentState extends State<SidebarContent> {
                       ),
                     ),
                     const SizedBox(height: Dimens.s),
-                    ...widget.client!.files
+                    ..._client!.files
                         .map(
                           (file) => _sidebarTile(
                             context,
-                            const Icon(
-                              Icons.storage_rounded,
-                              color: Colors.white70,
+                            Icon(
+                              file.isSend
+                                  ? Icons.send_and_archive
+                                  : Icons.storage_rounded,
+                              color: file.isSend
+                                  ? Colors.greenAccent
+                                  : Colors.white70,
                             ),
                             context.localization.clientFilesSizeText(file.size),
                           ),
@@ -141,9 +124,9 @@ class _SidebarContentState extends State<SidebarContent> {
         ),
       );
 
-  @override
-  void dispose() {
-    _refreshTimer?.cancel();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _refreshTimer?.cancel();
+  //   super.dispose();
+  // }
 }

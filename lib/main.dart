@@ -1,3 +1,4 @@
+import 'package:auction_sym/data/service/auction_service_impl.dart';
 import 'package:auction_sym/data/service/generator_service_impl.dart';
 import 'package:auction_sym/generated/l10n.dart';
 import 'package:auction_sym/simulation/cubit/simulation_cubit.dart';
@@ -19,8 +20,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: MacosThemeData(),
         home: BlocProvider(
-          create: (context) =>
-              SimulationCubit(GeneratorServiceImpl())..startSimulation(),
+          create: (context) => SimulationCubit(
+            GeneratorServiceImpl(),
+            AuctionServiceImpl(),
+          )..startSimulation(),
           child: const SimulationPage(),
         ),
         localizationsDelegates: const [

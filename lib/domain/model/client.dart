@@ -25,6 +25,14 @@ class Client extends Equatable {
         waitingTimer: Stopwatch()..start(),
       );
 
+  Client markFileAsSend() {
+    List<SimulationFile> newFiles = List.from(files);
+    newFiles
+      ..add(newFiles.first.markAsSend())
+      ..removeAt(0);
+    return Client(id: id, files: newFiles, waitingTimer: waitingTimer);
+  }
+
   int get getWaitingTime => waitingTimer.elapsed.inSeconds;
 
   @override
